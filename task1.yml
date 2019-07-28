@@ -1,0 +1,48 @@
+- hosts: domain
+  tasks:
+    - name: Create Directory /mnt/tes
+      file:
+        path: /mnt/tes/
+        state: directory
+    - name: Create user joko and tono
+      user: 
+        name: joko
+        state: present
+    - name: Create user joko and tono
+      user: 
+        name: tono
+        state: present      
+    - name: Create file idnmantab.txt
+      file:
+        path: /mnt/tes/idnmantab.txt
+        state: touch
+        owner: joko
+        mode: 0777
+    - name: Remove File idn.txt
+      file:
+        path: /tmp/idn.txt
+        state: absent
+    - name: Install Postfix CentOS
+      yum:
+        name: postfix
+        state: present   
+    - name: Install Postfix APT
+      apt:
+        name: postfix
+        state: present   
+    - name: Service start postfix
+      service:
+        name: postfix
+        state: started
+    - name: Allow firewall 443
+      firewalld:
+        port: 443/tcp
+        state: enabled
+        permanent: true
+        immediate: true
+    - name: Allow firewall 990
+      firewalld:
+        port: 443/udp
+        state: enabled
+        permanent: true
+        immediate: true

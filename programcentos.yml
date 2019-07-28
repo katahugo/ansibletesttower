@@ -1,0 +1,4 @@
+web: httpd
+mail: postfix
+ntp: ntp
+
